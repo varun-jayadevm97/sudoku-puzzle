@@ -1,0 +1,35 @@
+
+module top;
+    initial begin
+    
+    sudoku_puzzle sudo;
+    sudo = new();
+
+    sudo.puzzle = '{    '{ 0,2,0, 0,0,0, 0,0,0 },
+                        '{ 0,0,0, 6,0,0, 0,0,3 },
+                        '{ 0,7,4, 0,8,0, 0,0,0 },
+                        '{ 0,0,0, 0,0,3, 0,0,2 },
+                        '{ 0,8,0, 0,4,0, 0,1,0 },
+                        '{ 6,0,0, 5,0,0, 0,0,0 },
+                        '{ 0,0,0, 0,1,0, 7,8,0 },
+                        '{ 5,0,0, 0,0,9, 0,0,0 },
+                        '{ 0,0,0, 0,0,0, 0,4,0 } 
+                    };
+
+    assertion_name:
+      assert ( sudo.randomize() ) $display("randomization is successful"); 			else $display(" randomization has failed");
+      
+      
+      
+      foreach(sudo.puzzle[i,j])
+        sudo.puzzle_output[i][j] = sudo.box[i][j] ;
+
+      foreach(sudo.puzzle_output[i])
+        $display("%p", sudo.puzzle_output[i]);
+    
+    // two types of display here
+      $display("%p", sudo.puzzle_output); // line prnter 
+    end
+
+endmodule
+
