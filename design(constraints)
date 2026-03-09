@@ -1,0 +1,34 @@
+`define GRID 9
+
+class sudoku_puzzle;
+
+    int puzzle [`GRID][`GRID];
+    rand int box[`GRID][`GRID];
+    rand int box_map[`GRID][`GRID];
+  int puzzle_output[`GRID][`GRID];	
+
+    constraint a_1 {foreach (puzzle[i,j]) (puzzle[i][j])!=0 -> box[i][j] == puzzle[i][j] ; }
+
+    constraint a_2{ foreach (box[i,j]) box[i][j] inside {[1:9]} ;} 
+
+    constraint a_3 { foreach (box[i]) unique{box[i]} ;}
+    
+    constraint a_4 { foreach (box[j]) unique{ box[0][j] , box[1][j] , box[2][j] , box[3][j] , box[4][j] , box[5][j] , box[6][j] , box[7][j] , box[8][j] } ;}
+
+
+    constraint a_5 {
+             foreach (box_map[i, j]) 
+             {
+                box_map[i][j] == box[(i/3)*3 + j/3]
+                [(i%3)*3 + j%3];
+            }
+
+            foreach (box_map[i])
+            {
+                unique { box_map[i] };
+            }
+}
+
+              
+              
+endclass
